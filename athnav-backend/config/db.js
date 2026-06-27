@@ -22,7 +22,8 @@ export async function testConnection() {
     console.log('✅ MySQL connected:', process.env.DB_HOST)
     conn.release()
   } catch (err) {
-    console.error('❌ MySQL connection failed:', err.message)
+    console.error("❌ MySQL connection failed");
+console.error(err);
   }
 }
 
