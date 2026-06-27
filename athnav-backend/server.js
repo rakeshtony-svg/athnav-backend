@@ -10,6 +10,7 @@ dotenv.config()
 import contactRouter from './routes/contact.js'
 import newsletterRouter from './routes/newsletter.js'
 import healthRouter from './routes/health.js'
+import { testConnection, initDB } from './config/db.js'
 
 const app = express()
 const PORT = process.env.PORT || 5000
@@ -54,6 +55,9 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).json({ error: process.env.NODE_ENV === 'production' ? 'Internal server error' : err.message })
 })
 
+
+await testConnection();
+await initDB();
 app.listen(PORT, () => {
   console.log(`✅ Athnav API running on port ${PORT}`)
   console.log(`   Environment: ${process.env.NODE_ENV || 'development'}`)
