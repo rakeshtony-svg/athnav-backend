@@ -56,11 +56,19 @@ app.use((err, req, res, next) => {
 })
 
 
-await testConnection();
-await initDB();
-app.listen(PORT, () => {
-  console.log(`✅ Athnav API running on port ${PORT}`)
-  console.log(`   Environment: ${process.env.NODE_ENV || 'development'}`)
-})
+(async () => {
+  try {
+    await testConnection();
+    await initDB();
+catch (err) {
+  console.error("❌ MySQL connection failed");
+  console.error(err);
+}
+
+  app.listen(PORT, () => {
+    console.log(`✅ Athnav API running on port ${PORT}`);
+    console.log(`Environment: ${process.env.NODE_ENV || "development"}`);
+  });
+})();
 
 export default app
