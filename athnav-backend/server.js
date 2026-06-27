@@ -60,10 +60,9 @@ app.use((err, req, res, next) => {
   try {
     await testConnection();
     await initDB();
-catch (err) {
-  console.error("❌ MySQL connection failed");
-  console.error(err);
-}
+  } catch (err) {
+    console.error("Database initialization failed:", err);
+  }
 
   app.listen(PORT, () => {
     console.log(`✅ Athnav API running on port ${PORT}`);
